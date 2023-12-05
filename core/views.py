@@ -35,7 +35,7 @@ class JobzoneView(View):
         url = "https://services.onetcenter.org/ws/mnm/interestprofiler/results"
 
         headers = {
-            'Authorization': self.data.key_auth,
+            'Authorization': 'Basic d2VtYXA6NjYyM2p4cA==',
             'Accept': 'application/json'
         }
 
@@ -56,7 +56,7 @@ class CareerView(View):
         url = "https://services.onetcenter.org/ws/mnm/interestprofiler/careers"
 
         headers = {
-            'Authorization': self.data.key_auth,
+            'Authorization': 'Basic d2VtYXA6NjYyM2p4cA==',
             'Accept': 'application/json'
         }
 
