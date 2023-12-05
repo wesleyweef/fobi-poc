@@ -7,6 +7,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 import requests
 from django.http import JsonResponse
+from django.http import Http404
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -27,10 +30,11 @@ class CareerPageView(View):
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class JobzoneView(View):
+class JobzoneView(APIView):
 
-    def post(self, request):
-        payload = {'answers': request.POST['answers']}
+    def post(self, request, format=None):
+
+        payload = {'answers': request.data['answers']}
 
         url = "https://services.onetcenter.org/ws/mnm/interestprofiler/results"
 
@@ -41,16 +45,16 @@ class JobzoneView(View):
 
         response = requests.get(url, headers=headers, params=payload)
 
-        return JsonResponse(response.json())
+        return Response(response.json())
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class CareerView(View):
+class CareerView(APIView):
 
-    def post(self, request):
+    def post(self, request, format=None):
         payload = {
-            'answers': request.POST['answers'],
-            'job_zone': request.POST['job_zone'],
+            'answers': request.data['answers'],
+            'job_zone': request.data['job_zone'],
         }
 
         url = "https://services.onetcenter.org/ws/mnm/interestprofiler/careers"
@@ -62,7 +66,7 @@ class CareerView(View):
 
         response = requests.get(url, headers=headers, params=payload)
 
-        return JsonResponse(response.json())
+        return Response(response.json())
 
 
 def index(request):
