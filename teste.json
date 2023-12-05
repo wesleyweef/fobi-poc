@@ -1,0 +1,26 @@
+{
+    "name": "Form1",
+    "slug": "teste",
+    "is_public": false,
+    "active_date_from": "2023-11-27T15:00:00Z",
+    "active_date_to": "2023-11-30T15:00:00Z",
+    "inactive_page_title": "t\u00e1 inativo",
+    "inactive_page_message": "",
+    "is_cloneable": false,
+    "success_page_title": "Top viu",
+    "success_page_message": "Top TOp",
+    "action": null,
+    "form_elements": [
+        {
+            "plugin_uid": "radio",
+            "position": 3,
+            "plugin_data": "{\"label\": \"teste 1\", \"name\": \"teste_1\", \"choices\": \"resposta1, resposta 1\\r\\nresposta2, resposta 2\\r\\nresposta3, resposta 3\", \"help_text\": \"\", \"initial\": \"\", \"required\": true}"
+        }
+    ],
+    "form_handlers": [
+        {
+            "plugin_uid": "db_store",
+            "plugin_data": null
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "label": "teste 1",
+    "name": "teste_1",
+    "choices": "resposta1, resposta 1\r\nresposta2, resposta 2\r\nresposta3, resposta 3",
+    "help_text": "",
+    "initial": "",
+    "required": true
+}
+{
+    "choices": "1, Strongly Dislike\r\n2, Dislike\r\n3, Unsure\r\n4, Like\r\n5, Strongly Like"
+}
+
+{
+    "value": 1,
+    "name": "Strongly Dislike"
+},
+{
+    "value": 2,
+    "name": "Dislike"
+},
+{
+    "value": 3,
+    "name": "Unsure"
+},
+{
+    "value": 4,
+    "name": "Like"
+},
+{
+    "value": 5,
+    "name": "Strongly Like"
+}

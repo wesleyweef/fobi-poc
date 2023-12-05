@@ -1,0 +1,21 @@
+{% extends "bootstrap3/base.html" %}
+
+
+{% load i18n %}
+
+{% block page-title %}{% trans "Import form entry" %}{% endblock page-title %}
+
+{% block navbar-menu-content %}
+{% endblock navbar-menu-content %}
+
+{% block navbar-menu-right-content %}
+            <li class="active"><a href="{% url 'fobi.dashboard' %}">{% trans "Forms" %}</a></li>
+            <li><a href="{% url 'fobi.form_wizards_dashboard' %}">{% trans "Wizards" %}</a></li>
+{% endblock navbar-menu-right-content %}
+
+{% block content %}
+<h2>It's easy to override a theme!</h2>
+{% endblock content %}
+
+{% block sidebar-wrapper %}
+{% endblock sidebar-wrapper %}

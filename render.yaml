@@ -1,0 +1,20 @@
+databases:
+  - name: fobi-poc
+    databaseName: fobi
+    user: fobi
+
+services:
+  - type: web
+    name: fobi-app
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn simple.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: fobi
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
