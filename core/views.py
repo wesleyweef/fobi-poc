@@ -6,6 +6,7 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 import requests
+from django.http import JsonResponse
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -23,6 +24,45 @@ class CareerPageView(View):
 
         return render(request, self.template_name, {'form': ''})
         # return redirect('/career/')
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class JobzoneView(View):
+
+    def post(self, request):
+        payload = {'answers': request.POST['answers']}
+
+        url = "https://services.onetcenter.org/ws/mnm/interestprofiler/results"
+
+        headers = {
+            'Authorization': self.data.key_auth,
+            'Accept': 'application/json'
+        }
+
+        response = requests.get(url, headers=headers, params=payload)
+
+        return JsonResponse(response.json())
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class CareerView(View):
+
+    def post(self, request):
+        payload = {
+            'answers': request.POST['answers'],
+            'job_zone': request.POST['job_zone'],
+        }
+
+        url = "https://services.onetcenter.org/ws/mnm/interestprofiler/careers"
+
+        headers = {
+            'Authorization': self.data.key_auth,
+            'Accept': 'application/json'
+        }
+
+        response = requests.get(url, headers=headers, params=payload)
+
+        return JsonResponse(response.json())
 
 
 def index(request):
