@@ -1,7 +1,7 @@
 databases:
-  - name: fobi-poc
+  - name: fobi-db
     databaseName: fobi
-    user: fobi
+    user: dbuser
 
 services:
   - type: web
