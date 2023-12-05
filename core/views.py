@@ -1,3 +1,5 @@
+from django.http import HttpResponse
+from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.shortcuts import render, redirect
 from django.views import View
@@ -21,3 +23,7 @@ class CareerPageView(View):
 
         return render(request, self.template_name, {'form': ''})
         # return redirect('/career/')
+
+
+def index(request):
+    return HttpResponse('<h1>fobi<h1/>')

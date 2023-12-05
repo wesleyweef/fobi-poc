@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.urls import path, re_path, include
 from fobi.contrib.apps.drf_integration.urls import fobi_router
-from core.views import CareerPageView
+from core.views import CareerPageView, index
 
 
 urlpatterns = [
+    path('', index, name='index'),
     path("admin/", admin.site.urls),
     # View URLs
     re_path(r'^fobi/', include('fobi.urls.class_based.view')),
