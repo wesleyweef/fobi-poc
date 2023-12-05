@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import dj_database_url
 from pathlib import Path
 from decouple import config
 import os
@@ -29,20 +30,18 @@ DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = []
 
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME') if RENDER_EXTERNAL_HOSTNAME:    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 CORS_ALLOW_ALL_ORIGINS = True
 # Application definition
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://9680-2804-25ac-41e-7300-e181-73d3-3194-3c07.ngrok-free.app",
-]
+CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 
-CORS_ORIGIN_WHITELIST = [
-    "https://9680-2804-25ac-41e-7300-e181-73d3-3194-3c07.ngrok-free.app",
-]
+CORS_ORIGIN_WHITELIST = ALLOWED_HOSTS
 
 
 FOBI_DEFAULT_THEME = 'bootstrap3'
@@ -160,7 +159,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -196,7 +195,6 @@ WSGI_APPLICATION = "simple.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 # Don't forget to import dj-database-url at the beginning of the file
-import dj_database_url
 
 # DATABASES = {
 #     "default": {
@@ -211,14 +209,18 @@ import dj_database_url
 
 
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default=config('DATABASE_URL'),
+        conn_max_age=600
+    )
 }
 
 # Feel free to alter this value to suit your needs.
 # default='postgresql://postgres:postgres@localhost:5432/mysite',
 # conn_max_age=600    )}
 
-LOGIN_URL = '/adm   in/login/'
+LOGIN_URL = '/admin/login/'
 LOGIN_REDIRECT_URL = '/admin/login/'
 
 # Password validation
