@@ -46,7 +46,7 @@ class JobzoneView(APIView):
         response_json = response.json()
 
         dados, created = Dados.objects.get_or_create(
-            email=response_json['email'],
+            email=request.data['email'],
             defaults={},
         )
 
@@ -79,7 +79,7 @@ class CareerView(APIView):
         response_json = response.json()
 
         dados, created = Dados.objects.get_or_create(
-            email=response_json['email'],
+            email=request.data['email'],
             defaults={},
         )
 
