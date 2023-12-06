@@ -5,6 +5,7 @@ class Dados(models.Model):
     email = models.CharField("Email", blank=False, null=False, max_length=80)
     job_zone = models.TextField("Job Zone", blank=True, null=True)
     carrer = models.TextField("Career", blank=True, null=True)
+    answers = models.TextField("Answers", blank=True, null=True)
     created_at = models.DateTimeField(
         "Criado em", editable=False, auto_now_add=True)
     updated_at = models.DateTimeField(

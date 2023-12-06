@@ -10,6 +10,7 @@ from django.http import JsonResponse
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from core.models import Dados
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -17,13 +18,10 @@ class CareerPageView(View):
     template_name = "core/career.html"
 
     def get(self, request):
-        print('get')
-        print(request.GET)
+
         return render(request, self.template_name, {'form': ''})
 
     def post(self, request):
-        print('post')
-        print(request.POST)
 
         return render(request, self.template_name, {'form': ''})
         # return redirect('/career/')
@@ -45,7 +43,19 @@ class JobzoneView(APIView):
 
         response = requests.get(url, headers=headers, params=payload)
 
-        return Response(response.json())
+        response_json = response.json()
+
+        dados, created = Dados.objects.get_or_create(
+            email=response_json['email'],
+            defaults={},
+        )
+
+        dados.answers = request.data['answers']
+        dados.job_zone = response_json
+
+        dados.save()
+
+        return Response(response_json)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -66,7 +76,18 @@ class CareerView(APIView):
 
         response = requests.get(url, headers=headers, params=payload)
 
-        return Response(response.json())
+        response_json = response.json()
+
+        dados, created = Dados.objects.get_or_create(
+            email=response_json['email'],
+            defaults={},
+        )
+
+        dados.carrer = response_json
+
+        dados.save()
+
+        return Response(response_json)
 
 
 def index(request):
