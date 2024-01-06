@@ -94,7 +94,7 @@ question_to_import = []
 for question in questions:
     question_to_import.append({
         "label": question["text"],
-        "name": question["text"].replace(" ", "_").lower(),
+        "name": question["text"].replace(" ", "_").toLowerCase(),
         "choices": choices,
         "help_text": "",
         "initial": "",
